@@ -14,24 +14,25 @@
                     <div class="inputBox">
                         <input type="email" class='form-control'
                         aria-describedby="idemail" 
-                        [ngClass] = "{'is-invalid': formlogin.get('email')?.invalid}" 
+                        [ngClass] = "{'is-invalid': formlogin.get('email')?.invalid && this.formlogin.get('email')?.touched}" 
                         placeholder="Email" 
                         formControlName="email" >
                     </div>
-                    <div class="form-text text-danger" id='idemail' *ngIf="formlogin.get('email')?.errors?.['required']">This email is required</div>
-                    <div class="form-text text-danger" id='idemail' *ngIf="formlogin.get('email')?.errors?.['email']">This input is format email</div>
+                    <div class="form-text text-danger" id='idemail' *ngIf="formlogin.get('email')?.errors?.['required'] && this.formlogin.get('email')?.touched">This email is required</div>
+                    <div class="form-text text-danger" id='idemail' *ngIf="formlogin.get('email')?.errors?.['email'] && this.formlogin.get('email')?.touched " >This input is format email</div>
                     <div class="inputBox">
                         <input type="password"
                          placeholder="Password"  
                          class="form-control" 
-                         [ngClass] = "{'is-invalid': formlogin.get('password')?.invalid}"    
+                         [ngClass] = "{'is-invalid': formlogin.get('password')?.invalid && this.formlogin.get('password')?.touched  }"    
                          formControlName="password"
                           id="idpassword"
                          >
-                         <div id="idpassword" class="form-text text-danger" *ngIf="formlogin.get('password')?.errors?.['required']">This is password required</div>
+                         <div id="idpassword" class="form-text text-danger" 
+                         *ngIf="formlogin.get('password')?.errors?.['required'] && this.formlogin.get('password')?.touched ">This is password required</div>
                     </div>
                     <div class="inputBox">
-                        <button class="btn btn-outline-secondary"  type="submit">Login</button>
+                        <button class="btn btn-outline-secondary" [disabled]="!formlogin.valid" type="submit">Login</button>
                     </div>
                         <p class="forget">Don t have an acconunt ?  <a href="#">
                         Sign Up
